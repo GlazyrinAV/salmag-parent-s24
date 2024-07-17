@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${product.title}]] &ndash; Сельмаг</title>
+</head>
+<body>
+<h1 data-th-text="${product.title}"></h1>
+
+<a data-th-href="@{/catalogue/products/list}">&larr; К списку товаров </a><br>
+<br>
+
+<a data-th-href="@{/catalogue/products/{productId}/edit(productId=${product.id})}">Изменить товар </a><br>
+<br>
+
+<form method="post" data-th-action="@{/catalogue/products/{productId}/delete(productId=${product.id})}">
+    <button type="submit">Удалить</button>
+</form>
+
+<ul>
+    <li><strong>Id</strong>: <span data-th-text="${product.id}"></span></li>
+    <li><strong>Title</strong>: <span data-th-text="${product.title}"></span></li>
+    <li><strong>Details</strong>: <span data-th-text="${product.details}"></span></li>
+</ul>
+
+</body>
+</html>
