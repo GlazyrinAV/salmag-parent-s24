@@ -1,11 +1,14 @@
 package ru.avg.managerapp.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ru.avg.managerapp.controller.dto.UpdateProductDto;
 import ru.avg.managerapp.entity.Product;
@@ -40,9 +43,18 @@ public class ProductController {
     }
 
     @PostMapping("edit")
-    public String updateProduct(@ModelAttribute("product") Product product, UpdateProductDto updateProductDto) {
-        this.productService.updateProduct(product.getId(), updateProductDto.title(), updateProductDto.details());
-        return "redirect:/catalogue/products/%d".formatted(product.getId());
+    public String updateProduct(@ModelAttribute(value = "product", binding = false) Product product, @Valid UpdateProductDto updateProductDto,
+                                BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("dto", updateProductDto);
+            model.addAttribute("errors", bindingResult.getAllErrors().stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .toList());
+            return "catalogue/products/edit";
+        } else {
+            this.productService.updateProduct(product.getId(), updateProductDto.title(), updateProductDto.details());
+            return "redirect:/catalogue/products/%d".formatted(product.getId());
+        }
     }
 
     @PostMapping("delete")
@@ -54,7 +66,8 @@ public class ProductController {
     @ExceptionHandler(NoSuchElementException.class)
     public String handleNoSuchElementException(NoSuchElementException e, Model model, HttpServletResponse response,
                                                Locale locale) {
-        model.addAttribute("error", e.getMessage());
+        model.addAttribute("error",
+                this.messageSource.getMessage(e.getMessage(), new Object[0], e.getMessage(), locale));
         response.setStatus(HttpStatus.NOT_FOUND.value());
         return "errors/404";
     }
