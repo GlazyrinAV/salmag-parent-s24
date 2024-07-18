@@ -1,18 +1,10 @@
 package ru.avg.managerapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public record Product(
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Product {
+        int id,
 
-    private Integer id;
+        String title,
 
-    private String title;
-
-    private String details;
-
+        String details) {
 }

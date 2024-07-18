@@ -1,11 +1,10 @@
-package ru.avg.managerapp.service;
+package ru.avg.catalogueservice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.avg.managerapp.entity.Product;
-import ru.avg.managerapp.repository.ProductRepository;
+import ru.avg.catalogueservice.entity.Product;
+import ru.avg.catalogueservice.repository.ProductRepository;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -16,7 +15,7 @@ public class DefaultProductService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<Product> findAllProducts() {
+    public Iterable<Product> findAllProducts() {
         return this.productRepository.findAll();
     }
 
@@ -35,7 +34,7 @@ public class DefaultProductService implements ProductService {
         this.productRepository.findById(id).ifPresentOrElse(product -> {
             product.setTitle(title);
             product.setDetails(detail);
-        }, () -> new NoSuchElementException());
+        }, NoSuchElementException::new);
     }
 
     @Override
