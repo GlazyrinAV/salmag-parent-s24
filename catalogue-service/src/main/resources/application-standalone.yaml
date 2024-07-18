@@ -3,11 +3,17 @@ server:
 
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/catalogue
-    username: catalogue
-    password: catalogue
+    username: root
+    password: root
   flyway:
     schemas:
       - public
       - catalogue
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    sql: info

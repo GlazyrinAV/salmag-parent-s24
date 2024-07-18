@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.avg.managerapp.client.ProductRestClient;
 import ru.avg.managerapp.controller.dto.NewProductDto;
 import ru.avg.managerapp.entity.Product;
@@ -19,8 +20,9 @@ public class ProductsController {
     private final ProductRestClient productRestClient;
 
     @GetMapping("list")
-    public String getProductsList(Model model) {
-        model.addAttribute("products", this.productRestClient.findAllProducts());
+    public String getProductsList(@RequestParam(name = "filter", required = false) String filter, Model model) {
+        model.addAttribute("products", this.productRestClient.findAllProducts(filter));
+        model.addAttribute("filter", filter);
         return "catalogue/products/list";
     }
 

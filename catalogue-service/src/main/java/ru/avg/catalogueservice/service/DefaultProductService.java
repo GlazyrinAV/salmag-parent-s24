@@ -1,5 +1,6 @@
 package ru.avg.catalogueservice.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.avg.catalogueservice.entity.Product;
@@ -15,11 +16,16 @@ public class DefaultProductService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public Iterable<Product> findAllProducts() {
-        return this.productRepository.findAll();
+    public Iterable<Product> findAllProducts(String filter) {
+        if (filter == null || filter.isBlank()) {
+            return this.productRepository.findAll();
+        } else {
+            return this.productRepository.findAllByTitleLikeIgnoreCase("%" + filter + "%");
+        }
     }
 
     @Override
+    @Transactional
     public Product createNewProduct(String title, String details) {
         return this.productRepository.save(new Product(null, title, details));
     }
@@ -30,6 +36,7 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
+    @Transactional
     public void updateProduct(Integer id, String title, String detail) {
         this.productRepository.findById(id).ifPresentOrElse(product -> {
             product.setTitle(title);
@@ -38,7 +45,10 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(Integer id) {
         this.productRepository.deleteById(id);
     }
+
+
 }
