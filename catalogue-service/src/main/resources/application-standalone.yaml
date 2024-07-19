@@ -3,11 +3,10 @@ server:
 
 spring:
   security:
-    user:
-      name: catalogue_service_user
-      password: password
-      roles:
-        - SERVICE
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/selmag
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/catalogue
