@@ -1,4 +1,29 @@
 selmag:
   services:
     catalogue:
+      username: catalogue_service_user
+      password: password
       uri: http://localhost:8081
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/manager
+    username: root
+    password: root
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: manager-app
+            client-secret: uJJ2MlWCmoTHyQwArrNpOfH2h5957NI2
+            scope:
+              - openid
+              - view_catalogue
+              - edit_catalogue
+              - microprofile-jwt
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/selmag
+            user-name-attribute: preferred_username
