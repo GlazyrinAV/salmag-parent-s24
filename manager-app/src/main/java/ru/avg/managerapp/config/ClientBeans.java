@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedCli
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.web.client.RestClient;
 import ru.avg.managerapp.client.RestClientProductRestClient;
+import ru.avg.managerapp.security.OAuthClientRequestInterceptor;
 
 @Configuration
 public class ClientBeans {

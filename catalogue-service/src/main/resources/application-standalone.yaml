@@ -1,24 +1,21 @@
-server:
-  port: 8081
-
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8082/realms/selmag
   datasource:
-    driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/catalogue
-    username: root
-    password: root
+    username: catalogue
+    password: catalogue
   flyway:
     schemas:
       - public
       - catalogue
   jpa:
     show-sql: true
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/selmag
+server:
+  port: 8081
 logging:
   level:
     sql: info

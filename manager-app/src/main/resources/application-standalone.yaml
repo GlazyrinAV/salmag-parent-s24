@@ -3,13 +3,7 @@ selmag:
     catalogue:
       registration-id: keycloak
       uri: http://localhost:8081
-
 spring:
-  datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/manager
-    username: root
-    password: root
   security:
     oauth2:
       client:

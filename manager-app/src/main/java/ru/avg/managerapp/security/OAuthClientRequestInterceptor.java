@@ -1,4 +1,4 @@
-package ru.avg.managerapp.config;
+package ru.avg.managerapp.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
