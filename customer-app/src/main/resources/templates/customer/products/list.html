@@ -7,6 +7,10 @@
 <body>
 <h1>Наши товары</h1>
 
+<form>
+    <label>Фильтр: <input data-th-text="${filter}" data-th-value="${filter}"> <button type="submit">Поиск</button></label>
+</form>
+
 <ul>
     <li data-th-each="product : ${products}">
         <strong>
