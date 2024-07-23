@@ -14,6 +14,8 @@ import ru.avg.customerapp.entity.Product;
 import ru.avg.customerapp.service.FavoriteProductsService;
 import ru.avg.customerapp.service.ProductReviewsService;
 
+import java.util.NoSuchElementException;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("customer/products/{productId:\\d+}")
@@ -27,7 +29,8 @@ public class ProductController {
 
     @ModelAttribute(name = "product", binding = false)
     public Mono<Product> loadProduct(@PathVariable("productId") int productId) {
-        return this.productsClient.findProduct(productId);
+        return this.productsClient.findProduct(productId)
+                .switchIfEmpty(Mono.error(new NoSuchElementException("customer.errors.product.not_found")));
     }
 
     @GetMapping
@@ -76,5 +79,11 @@ public class ProductController {
             return this.productReviewsService.createReview(productId, newProductReview.rating(), newProductReview.review())
                     .thenReturn("redirect:/customer/products/%d".formatted(productId));
         }
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public String handleException(RuntimeException e, Model model) {
+        model.addAttribute("error", e.getMessage());
+        return "customer/errors/404";
     }
 }

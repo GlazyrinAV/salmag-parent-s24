@@ -5,9 +5,10 @@
     <title>Наши товары &ndash; Сельмаг</title>
 </head>
 <body>
-<h1>Наши товары</h1>
+<h1>Избранные товары</h1>
 
-<a data-th-href="@{/customer/products/favorites}">Избранные товары</a>
+<a data-th-href="@{/customer/products/list}">&larr; Вернуться к списку товаров</a> <br>
+
 <form>
     <label>Фильтр: <input data-th-text="${filter}" data-th-value="${filter}"> <button type="submit">Поиск</button></label>
 </form>

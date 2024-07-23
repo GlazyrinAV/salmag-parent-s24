@@ -2,6 +2,7 @@ package ru.avg.customerapp.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.avg.customerapp.entity.FavoriteProduct;
 import ru.avg.customerapp.repository.FavoriteProductRepository;
@@ -27,5 +28,10 @@ public class DefaultFavoriteProductsService implements FavoriteProductsService {
     @Override
     public Mono<FavoriteProduct> findFavoriteProduct(int productId) {
         return this.favoriteProductRepository.findByProductId(productId);
+    }
+
+    @Override
+    public Flux<FavoriteProduct> findAllFavoriteProducts() {
+        return this.favoriteProductRepository.findAll();
     }
 }
