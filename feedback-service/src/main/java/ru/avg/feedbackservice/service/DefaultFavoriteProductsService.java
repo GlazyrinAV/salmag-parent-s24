@@ -1,11 +1,11 @@
-package ru.avg.customerapp.service;
+package ru.avg.feedbackservice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.avg.customerapp.entity.FavoriteProduct;
-import ru.avg.customerapp.repository.FavoriteProductRepository;
+import ru.avg.feedbackservice.entity.FavoriteProduct;
+import ru.avg.feedbackservice.repository.FavoriteProductRepository;
 
 import java.util.UUID;
 

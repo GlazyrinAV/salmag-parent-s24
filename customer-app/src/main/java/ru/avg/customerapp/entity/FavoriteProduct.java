@@ -1,17 +1,4 @@
 package ru.avg.customerapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.UUID;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class FavoriteProduct {
-
-    private UUID id;
-
-    private int productId;
+public record FavoriteProduct(int productId) {
 }

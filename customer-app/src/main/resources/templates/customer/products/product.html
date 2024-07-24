@@ -36,7 +36,7 @@
     <label>
         Отзыв:
         <br>
-        <textarea name="review"></textarea>
+        <textarea name="review" data-th-text="${dto?.review()}"></textarea>
     </label>
     <button type="submit">Отправить отзыв</button>
 </form>

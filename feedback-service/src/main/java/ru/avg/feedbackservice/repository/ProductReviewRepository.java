@@ -1,8 +1,8 @@
-package ru.avg.customerapp.repository;
+package ru.avg.feedbackservice.repository;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.avg.customerapp.entity.ProductReview;
+import ru.avg.feedbackservice.entity.ProductReview;
 
 public interface ProductReviewRepository {
 

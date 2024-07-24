@@ -8,8 +8,11 @@
 <h1>Наши товары</h1>
 
 <a data-th-href="@{/customer/products/favorites}">Избранные товары</a>
-<form>
-    <label>Фильтр: <input data-th-text="${filter}" data-th-value="${filter}"> <button type="submit">Поиск</button></label>
+<br>
+<form method="get" data-th-action="@{/customer/products/list}">
+    <label>Filter:<input type="text" name="filter" data-th-value="${filter}">
+        <button type="submit">Search</button>
+    </label>
 </form>
 
 <ul>

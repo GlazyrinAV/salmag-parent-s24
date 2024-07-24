@@ -1,9 +1,9 @@
-package ru.avg.customerapp.repository;
+package ru.avg.feedbackservice.repository;
 
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.avg.customerapp.entity.ProductReview;
+import ru.avg.feedbackservice.entity.ProductReview;
 
 import java.util.Collections;
 import java.util.LinkedList;

@@ -20,7 +20,8 @@ public class ProductsController {
     private final ProductRestClient productRestClient;
 
     @GetMapping("list")
-    public String getProductsList(@RequestParam(name = "filter", required = false) String filter, Model model) {
+    public String getProductsList(@RequestParam(name = "filter", required = false) String filter,
+                                  Model model) {
         model.addAttribute("products", this.productRestClient.findAllProducts(filter));
         model.addAttribute("filter", filter);
         return "catalogue/products/list";
