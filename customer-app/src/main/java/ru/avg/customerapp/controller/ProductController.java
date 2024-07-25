@@ -1,6 +1,8 @@
 package ru.avg.customerapp.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.web.reactive.result.view.CsrfRequestDataValueProcessor;
 import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -87,7 +89,8 @@ public class ProductController {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public String handleException(RuntimeException e, Model model) {
+    public String handleException(RuntimeException e, Model model, ServerHttpResponse response) {
+        response.setStatusCode(HttpStatus.NOT_FOUND);
         model.addAttribute("error", e.getMessage());
         return "customer/errors/404";
     }
