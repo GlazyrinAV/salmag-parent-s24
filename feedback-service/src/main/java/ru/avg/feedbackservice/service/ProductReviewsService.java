@@ -6,7 +6,7 @@ import ru.avg.feedbackservice.entity.ProductReview;
 
 public interface ProductReviewsService {
 
-    Mono<ProductReview> createReview(int productId, int rating, String review);
+    Mono<ProductReview> createReview(int productId, int rating, String review, String userId);
 
     Flux<ProductReview> findProductReviewsForProduct(int productId);
 }

@@ -6,11 +6,11 @@ import ru.avg.feedbackservice.entity.FavoriteProduct;
 
 public interface FavoriteProductsService {
 
-    Mono<FavoriteProduct> addProductToFavorites(int productId);
+    Mono<FavoriteProduct> addProductToFavorites(int productId, String userId);
 
-    Mono<Void> removeProductFromFavorites(int productId);
+    Mono<Void> removeProductFromFavorites(int productId, String userId);
 
-    Mono<FavoriteProduct> findFavoriteProduct(int productId);
+    Mono<FavoriteProduct> findFavoriteProduct(int productId, String userId);
 
-    Flux<FavoriteProduct> findAllFavoriteProducts();
+    Flux<FavoriteProduct> findAllFavoriteProducts(String userId);
 }

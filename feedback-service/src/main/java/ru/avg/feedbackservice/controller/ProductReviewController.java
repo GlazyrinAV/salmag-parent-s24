@@ -3,6 +3,7 @@ package ru.avg.feedbackservice.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
@@ -24,11 +25,12 @@ public class ProductReviewController {
     }
 
     @PostMapping
-    public Mono<ResponseEntity<ProductReview>> saveProductReview(@Valid @RequestBody Mono<NewProductReview> dto,
+    public Mono<ResponseEntity<ProductReview>> saveProductReview(Mono<JwtAuthenticationToken> tokenMono,
+                                                                 @Valid @RequestBody Mono<NewProductReview> dto,
                                                                  UriComponentsBuilder uriBuilder) {
-        return dto
+        return tokenMono.flatMap(token -> dto
                 .flatMap(newProductReview -> this.productReviewsService.createReview(newProductReview.productId()
-                        , newProductReview.rating(), newProductReview.review()))
+                        , newProductReview.rating(), newProductReview.review(), token.getToken().getSubject())))
                 .map(productReview -> ResponseEntity
                         .created(uriBuilder
                                 .replacePath("/feedback-api/product-reviews/{id}")

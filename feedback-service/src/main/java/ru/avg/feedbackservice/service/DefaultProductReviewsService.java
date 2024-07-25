@@ -21,9 +21,9 @@ public class DefaultProductReviewsService implements ProductReviewsService {
     private final ReactiveMongoTemplate reactiveMongoTemplate;
 
     @Override
-    public Mono<ProductReview> createReview(int productId, int rating, String review) {
+    public Mono<ProductReview> createReview(int productId, int rating, String review, String userId) {
         return this.productReviewRepository.save(
-                new ProductReview(UUID.randomUUID(), productId, rating, review)
+                new ProductReview(UUID.randomUUID(), productId, rating, review, userId)
         );
     }
 

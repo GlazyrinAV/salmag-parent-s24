@@ -11,7 +11,7 @@ import ru.avg.managerapp.client.RestClientProductRestClient;
 import ru.avg.managerapp.security.OAuthClientRequestInterceptor;
 
 @Configuration
-public class ClientBeans {
+public class ClientConfig {
 
     @Bean
     public RestClientProductRestClient restClientProductRestClient(

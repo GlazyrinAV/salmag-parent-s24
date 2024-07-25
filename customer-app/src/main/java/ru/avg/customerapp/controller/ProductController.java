@@ -1,9 +1,12 @@
 package ru.avg.customerapp.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.web.reactive.result.view.CsrfRequestDataValueProcessor;
+import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 import ru.avg.customerapp.client.FavoriteProductsClient;
 import ru.avg.customerapp.client.ProductsClient;
@@ -29,6 +32,13 @@ public class ProductController {
     public Mono<Product> loadProduct(@PathVariable("productId") int productId) {
         return this.productsClient.findProduct(productId)
                 .switchIfEmpty(Mono.error(new NoSuchElementException("customer.errors.product.not_found")));
+    }
+
+    @ModelAttribute
+    public Mono<CsrfToken> loadCsrfToken(ServerWebExchange exchange) {
+        return exchange.<Mono<CsrfToken>>getAttribute(CsrfToken.class.getName())
+                .doOnSuccess(token -> exchange.getAttributes()
+                        .put(CsrfRequestDataValueProcessor.DEFAULT_CSRF_ATTR_NAME, token));
     }
 
     @GetMapping
