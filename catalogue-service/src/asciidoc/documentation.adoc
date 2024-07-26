@@ -1,0 +1,12 @@
+= Rest API Каталога
+:toc: right
+
+== Rest API Товара
+
+=== Получение товара
+
+.Тело ответа
+include::{snippets}/catalogue/products/find_all/response-body.adoc[]
+
+.Свойства ответа
+include::{snippets}/catalogue/products/find_all/response-fields.adoc[]

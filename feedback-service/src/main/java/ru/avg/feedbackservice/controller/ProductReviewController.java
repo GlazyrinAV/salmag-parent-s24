@@ -1,5 +1,7 @@
 package ru.avg.feedbackservice.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,17 @@ public class ProductReviewController {
     private final ProductReviewsService productReviewsService;
 
     @GetMapping("by-product-id/{productId:\\d+}")
+    @Operation(
+            security = @SecurityRequirement(name = "keycloak")
+    )
     public Flux<ProductReview> findProductReviewsByProductId(@PathVariable("productId") int productId) {
         return this.productReviewsService.findProductReviewsForProduct(productId);
     }
 
     @PostMapping
+    @Operation(
+            security = @SecurityRequirement(name = "keycloak")
+    )
     public Mono<ResponseEntity<ProductReview>> saveProductReview(Mono<JwtAuthenticationToken> tokenMono,
                                                                  @Valid @RequestBody Mono<NewProductReview> dto,
                                                                  UriComponentsBuilder uriBuilder) {

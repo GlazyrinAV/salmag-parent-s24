@@ -1,4 +1,4 @@
-package ru.avg.catalogueservice.controller.config;
+package ru.avg.catalogueservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

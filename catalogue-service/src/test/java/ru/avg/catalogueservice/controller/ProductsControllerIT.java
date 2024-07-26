@@ -2,11 +2,14 @@ package ru.avg.catalogueservice.controller;
 
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -20,6 +23,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
+@ExtendWith(RestDocumentationExtension.class)
 class ProductsControllerIT {
 
     @Autowired
@@ -51,7 +56,7 @@ class ProductsControllerIT {
     }
 
     @Test
-    void createProduct_requestValid_returnsNewPoduct() throws Exception {
+    void createProduct_requestValid_returnsNewProduct() throws Exception {
         //given
         var request = MockMvcRequestBuilders.post("/catalogue-api/products")
                 .contentType(MediaType.APPLICATION_JSON)

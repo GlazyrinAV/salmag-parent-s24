@@ -3,22 +3,33 @@ package ru.avg.feedbackservice.controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import ru.avg.feedbackservice.entity.ProductReview;
 
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.document;
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockJwt;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
+@AutoConfigureRestDocs
+@ExtendWith(RestDocumentationExtension.class)
 class ProductReviewControllerIT {
 
     @Autowired
@@ -85,7 +96,18 @@ class ProductReviewControllerIT {
                 .json("""
                         {"productId" :  1, "rating" :  5, "review" :  "review 3", "userId" :  "user-test"}
                         """)
-                .jsonPath("$.id").exists();
+                .jsonPath("$.id").exists()
+                .consumeWith(document("feedback/product_review/create_product_review",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("productId").type("int").description("Номер товара"),
+                                fieldWithPath("rating").type("int").description("Рейтинг товара"),
+                                fieldWithPath("review").type("String").description("Отзыв на товар")
+                        ),
+                        responseHeaders(headerWithName(HttpHeaders.LOCATION)
+                                .description("Ссылка на созданный отзыв о товаре"))
+                ));
     }
 
     @Test
