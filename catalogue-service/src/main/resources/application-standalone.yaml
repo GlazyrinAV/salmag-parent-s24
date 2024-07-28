@@ -35,6 +35,8 @@ spring:
         provider:
           keycloak:
             issuer-uri: http://localhost:8082/realms/selmag
+  application:
+    name: selmag-catalogue-service
 logging:
   level:
     sql: info

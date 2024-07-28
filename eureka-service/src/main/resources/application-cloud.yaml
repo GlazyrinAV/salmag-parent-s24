@@ -1,0 +1,29 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  application:
+    name: eureka-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/selmag
+      client:
+        provider:
+          keycloak:
+            user-name-attribute: preferred_username
+            issuer-uri: http://localhost:8082/realms/selmag
+        registration:
+          keycloak:
+            client-id: eureka-service
+            client-secret: T1mPXNXWHOA6AB9JsqZLLNJiLqI6mKz8
+            scope:
+              - openid

@@ -1,0 +1,71 @@
+selmag:
+  services:
+    catalogue:
+      uri: lb://selmag-catalogue-service
+      registration-id: keycloak
+spring:
+  application:
+    name: selmag-manager-app
+  boot:
+    admin:
+      client:
+        enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5433/manager
+    username: manager
+    password: manager
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/selmag
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/selmag
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: manager-app
+            client-secret: ha1tnrrxOH0OVgkD1UCrgrsv6hGIyPzg
+            scope:
+              - openid
+              - view_catalogue
+              - edit_catalogue
+              - microprofile-jwt
+          metrics:
+            provider: keycloak
+            client-id: manager-app
+            client-secret: ha1tnrrxOH0OVgkD1UCrgrsv6hGIyPzg
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics_server
+          discovery:
+            provider: keycloak
+            client-id: manager-app
+            client-secret: ha1tnrrxOH0OVgkD1UCrgrsv6hGIyPzg
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

@@ -1,6 +1,7 @@
 package ru.avg.managerapp.security;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -21,18 +22,21 @@ public class OAuthClientRequestInterceptor implements ClientHttpRequestIntercept
 
     private final String registrationId;
 
-    private final SecurityContextHolderStrategy securityContextHolderStrategy =
+    @Setter
+    private SecurityContextHolderStrategy securityContextHolderStrategy =
             SecurityContextHolder.getContextHolderStrategy();
 
     @Override
-    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
+    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+            throws IOException {
         if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
             OAuth2AuthorizedClient authorizedClient = this.authorizedClientManager.authorize(
-                    OAuth2AuthorizeRequest.withClientRegistrationId(registrationId)
+                    OAuth2AuthorizeRequest.withClientRegistrationId(this.registrationId)
                             .principal(this.securityContextHolderStrategy.getContext().getAuthentication())
                             .build());
             request.getHeaders().setBearerAuth(authorizedClient.getAccessToken().getTokenValue());
         }
+
         return execution.execute(request, body);
     }
 }

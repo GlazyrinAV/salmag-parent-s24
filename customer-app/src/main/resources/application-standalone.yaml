@@ -7,7 +7,6 @@ selmag:
 
 server:
   port: 8083
-
 spring:
   security:
     oauth2:
@@ -19,8 +18,10 @@ spring:
         registration:
           keycloak:
             client-id: customer-app
-            client-secret: I0F68vNU7AqW9eRTU3moMQ25JHsK9uIu
+            client-secret: zFKs1HSCAg4jPO9Lz36WMquRto2MkVw2
             authorization-grant-type: authorization_code
             scope:
               - openid
               - view_catalogue
+  application:
+    name: selmag-customer-app
