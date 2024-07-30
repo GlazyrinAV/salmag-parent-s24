@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: selmag-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: catalogue-service-route
+          uri: lb://selmag-catalogue-service
+          predicates:
+            - Host=http://catalogue.api.selm.ag.127.0.0.1.nip.io
+        - id: feedback-service-route
+          uri: lb://selmag-feedback-service
+          predicates:
+            - Host=http://feedback.api.selm.ag.127.0.0.1.nip.io
+server:
+  port: 8087
+  forward-headers-strategy: framework
+eureka:
+  client:
+    service-url:
+      service-url:
+        defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true

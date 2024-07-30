@@ -22,14 +22,14 @@ spring:
         registration:
           keycloak:
             client-id: catalogue-service-metrics-client
-            client-secret: gnhvX0P3MvLuGzxkDzw8iqk7khTFV5PZ
+            client-secret: C9tXalFgOpWOHRjmSZog661ghGG7WUJP
             authorization-grant-type: client_credentials
             scope:
               - metrics_server
           discovery:
             provider: keycloak
             client-id: catalogue-service-metrics-client
-            client-secret: gnhvX0P3MvLuGzxkDzw8iqk7khTFV5PZ
+            client-secret: C9tXalFgOpWOHRjmSZog661ghGG7WUJP
             authorization-grant-type: client_credentials
             scope:
               - discovery

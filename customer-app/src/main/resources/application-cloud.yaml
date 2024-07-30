@@ -20,7 +20,7 @@ spring:
         registration:
           keycloak:
             client-id: customer-app
-            client-secret: zFKs1HSCAg4jPO9Lz36WMquRto2MkVw2
+            client-secret: BrD0RTXm2PulcvUymfcXjbTRRPKCzq5W
             authorization-grant-type: authorization_code
             scope:
               - openid
@@ -28,7 +28,7 @@ spring:
           discovery:
             provider: keycloak
             client-id: customer-app
-            client-secret: zFKs1HSCAg4jPO9Lz36WMquRto2MkVw2
+            client-secret: BrD0RTXm2PulcvUymfcXjbTRRPKCzq5W
             authorization-grant-type: client_credentials
             scope:
               - discovery
