@@ -337,6 +337,7 @@
       ],
       "customer-app-metrics-client": [],
       "victoria-metrics": [],
+      "eureka-service": [],
       "manager-app-metrics-client": [],
       "feedback-service-metrics-client": [],
       "admin-cli": [],
@@ -562,6 +563,22 @@
       "enabled": true,
       "totp": false,
       "serviceAccountClientId": "customer-app-metrics-client",
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-selmag"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "1f0a5b2b-87c3-40c0-8927-1a13bed26618",
+      "username": "service-account-eureka-service",
+      "emailVerified": false,
+      "createdTimestamp": 1722173526653,
+      "enabled": true,
+      "totp": false,
+      "serviceAccountClientId": "eureka-service",
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
@@ -802,7 +819,7 @@
       "clientId": "admin-service",
       "name": "",
       "description": "",
-      "rootUrl": "http://localhost:8085",
+      "rootUrl": "http://localhost:8086",
       "adminUrl": "",
       "baseUrl": "",
       "surrogateAuthRequired": false,
@@ -811,10 +828,10 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "/*"
+        "http://localhost:8086/*"
       ],
       "webOrigins": [
-        "/*"
+        "http://localhost:8086"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -828,7 +845,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "client.secret.creation.time": "1708077555",
+        "client.secret.creation.time": "1722192713",
         "backchannel.logout.session.required": "true",
         "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
@@ -900,8 +917,10 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
+        "metrics_server",
         "metrics",
         "microprofile-jwt"
       ]
@@ -977,7 +996,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "client.secret.creation.time": "1708079305",
+        "client.secret.creation.time": "1722178098",
         "backchannel.logout.session.required": "true",
         "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
@@ -1048,6 +1067,7 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
         "metrics_server",
@@ -1106,9 +1126,12 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
-        "microprofile-jwt"
+        "metrics_server",
+        "microprofile-jwt",
+        "metrics"
       ]
     },
     {
@@ -1140,7 +1163,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "client.secret.creation.time": "1707816401",
+        "client.secret.creation.time": "1722164742",
         "backchannel.logout.session.required": "true",
         "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
@@ -1211,9 +1234,12 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
-        "microprofile-jwt"
+        "metrics_server",
+        "microprofile-jwt",
+        "metrics"
       ]
     },
     {
@@ -1318,6 +1344,114 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
+        "offline_access",
+        "view_catalogue",
+        "metrics_server",
+        "metrics",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "26cbd688-831d-4bfc-9738-1b607d262ec4",
+      "clientId": "eureka-service",
+      "name": "",
+      "description": "",
+      "rootUrl": "http://localhost:8761",
+      "adminUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "/*"
+      ],
+      "webOrigins": [
+        "/*"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "client.secret.creation.time": "1722173526",
+        "backchannel.logout.session.required": "true",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "display.on.consent.screen": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "protocolMappers": [
+        {
+          "id": "ce5e1552-1192-45f1-b912-1ac5899167cf",
+          "name": "Client ID",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "client_id",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "client_id",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "eec8d2c4-44fb-4617-98c0-457c6c9c6526",
+          "name": "Client Host",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientHost",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientHost",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "b4802f3c-c3cb-42b5-9e6a-ec399fbc295d",
+          "name": "Client IP Address",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientAddress",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientAddress",
+            "jsonType.label": "String"
+          }
+        }
+      ],
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "profile",
+        "roles",
+        "basic",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "edit_catalogue",
+        "address",
+        "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
         "metrics_server",
@@ -1356,7 +1490,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "client.secret.creation.time": "1708081086",
+        "client.secret.creation.time": "1722172797",
         "backchannel.logout.session.required": "true",
         "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
@@ -1427,6 +1561,7 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
         "metrics_server",
@@ -1484,9 +1619,12 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
-        "microprofile-jwt"
+        "metrics_server",
+        "microprofile-jwt",
+        "metrics"
       ]
     },
     {
@@ -1520,7 +1658,7 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "client.secret.creation.time": "1706872120",
+        "client.secret.creation.time": "1722164903",
         "backchannel.logout.session.required": "true",
         "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
@@ -1591,9 +1729,12 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
-        "microprofile-jwt"
+        "metrics_server",
+        "microprofile-jwt",
+        "metrics"
       ]
     },
     {
@@ -1698,6 +1839,7 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
         "metrics_server",
@@ -1844,6 +1986,7 @@
         "oidc.ciba.grant.enabled": "false",
         "client.secret.creation.time": "1722091621",
         "backchannel.logout.session.required": "true",
+        "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
@@ -1859,8 +2002,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "clientHost",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientHost",
             "jsonType.label": "String"
@@ -1874,8 +2018,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "clientAddress",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientAddress",
             "jsonType.label": "String"
@@ -1889,8 +2034,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "client_id",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "client_id",
             "jsonType.label": "String"
@@ -1909,6 +2055,7 @@
         "edit_catalogue",
         "address",
         "phone",
+        "discovery",
         "offline_access",
         "view_catalogue",
         "metrics_server",
@@ -1921,6 +2068,18 @@
     {
       "id": "7ee68466-6e62-4d39-80de-3920233c7a49",
       "name": "metrics",
+      "description": "",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "false",
+        "gui.order": "",
+        "consent.screen.text": ""
+      }
+    },
+    {
+      "id": "2c957bad-448e-4e28-9da4-636e25477b81",
+      "name": "discovery",
       "description": "",
       "protocol": "openid-connect",
       "attributes": {
@@ -1959,8 +2118,9 @@
           "consentRequired": false,
           "config": {
             "user.session.note": "AUTH_TIME",
-            "id.token.claim": "true",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "auth_time",
             "jsonType.label": "long"
@@ -2560,7 +2720,8 @@
     "edit_catalogue",
     "view_catalogue",
     "metrics",
-    "metrics_server"
+    "metrics_server",
+    "discovery"
   ],
   "browserSecurityHeaders": {
     "contentSecurityPolicyReportOnly": "",
@@ -2592,14 +2753,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-address-mapper",
             "oidc-full-name-mapper",
-            "oidc-usermodel-attribute-mapper",
+            "oidc-address-mapper",
             "saml-user-attribute-mapper",
-            "saml-user-property-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
             "oidc-usermodel-property-mapper",
-            "saml-role-list-mapper"
+            "saml-role-list-mapper",
+            "saml-user-property-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "oidc-sha256-pairwise-sub-mapper"
           ]
         }
       },
@@ -2658,11 +2819,11 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-role-list-mapper",
             "oidc-usermodel-property-mapper",
+            "oidc-full-name-mapper",
+            "saml-role-list-mapper",
             "oidc-address-mapper",
             "oidc-usermodel-attribute-mapper",
-            "oidc-full-name-mapper",
             "saml-user-property-mapper",
             "saml-user-attribute-mapper",
             "oidc-sha256-pairwise-sub-mapper"
@@ -3401,17 +3562,18 @@
   "firstBrokerLoginFlow": "first broker login",
   "attributes": {
     "cibaBackchannelTokenDeliveryMode": "poll",
-    "cibaExpiresIn": "120",
     "cibaAuthRequestedUserHint": "login_hint",
-    "oauth2DeviceCodeLifespan": "600",
     "clientOfflineSessionMaxLifespan": "0",
     "oauth2DevicePollingInterval": "5",
     "clientSessionIdleTimeout": "0",
-    "parRequestUriLifespan": "60",
-    "clientSessionMaxLifespan": "0",
     "clientOfflineSessionIdleTimeout": "0",
     "cibaInterval": "5",
-    "realmReusableOtpCode": "false"
+    "realmReusableOtpCode": "false",
+    "cibaExpiresIn": "120",
+    "oauth2DeviceCodeLifespan": "600",
+    "parRequestUriLifespan": "60",
+    "clientSessionMaxLifespan": "0",
+    "organizationsEnabled": "false"
   },
   "keycloakVersion": "25.0.2",
   "userManagedAccessAllowed": false,
