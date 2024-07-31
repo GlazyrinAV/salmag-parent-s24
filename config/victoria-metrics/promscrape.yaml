@@ -1,12 +1,14 @@
 scrape_configs:
   - job_name: selmag_admin_service
-    static-configs:
-      - targets: ["http://172.17.0.1:8086"]
-    metrics_path: actuator/prometheus
+    static_configs:
+      - targets: ["http://192.168.0.103:8086"]
+        labels:
+          application: selmag-admin-service
+    metrics_path: /actuator/prometheus
     oauth2:
-      client_id: victoria_metrics
-      client_secret: FyMIGfimzHJlhO11DSQdWUya2kEfOa8c
-      token_url: http://172.17.0.1:8082/realms/selmag/protocol/openid-connect/token
+      client_id: victoria-metrics
+      client_secret: 30tEDfYdPGOxeST97tNzg7I0m9ifIrBP
+      token_url: http://192.168.0.103:8082/realms/selmag/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:

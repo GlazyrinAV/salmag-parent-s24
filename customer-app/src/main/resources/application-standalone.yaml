@@ -13,12 +13,12 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://192.168.0.103:8082/realms/selmag
             user-name-attribute: preferred_username
         registration:
           keycloak:
             client-id: customer-app
-            client-secret: zFKs1HSCAg4jPO9Lz36WMquRto2MkVw2
+            client-secret: hUSE7JBtlE3LhUrIhEnAaYVXNELFD7Mn
             authorization-grant-type: authorization_code
             scope:
               - openid

@@ -11,16 +11,16 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/selmag
+          issuer-uri: http://192.168.0.103:8082/realms/selmag
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://192.168.0.103:8082/realms/selmag
             user-name-attribute: preferred_username
         registration:
           keycloak:
             client-id: customer-app
-            client-secret: BrD0RTXm2PulcvUymfcXjbTRRPKCzq5W
+            client-secret: hUSE7JBtlE3LhUrIhEnAaYVXNELFD7Mn
             authorization-grant-type: authorization_code
             scope:
               - openid
@@ -28,7 +28,7 @@ spring:
           discovery:
             provider: keycloak
             client-id: customer-app
-            client-secret: BrD0RTXm2PulcvUymfcXjbTRRPKCzq5W
+            client-secret: hUSE7JBtlE3LhUrIhEnAaYVXNELFD7Mn
             authorization-grant-type: client_credentials
             scope:
               - discovery

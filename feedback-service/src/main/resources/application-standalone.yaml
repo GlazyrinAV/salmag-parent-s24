@@ -16,18 +16,18 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/selmag
+          issuer-uri: http://192.168.0.103:8082/realms/selmag
       client:
         registration:
           keycloak:
             client-id: feedback-service-metrics-client
-            client-secret: TEOUKsszVl5m8eqTEkvKA0ASvjTDfQKZ
+            client-secret: aokwzqqqYkzURyLqLkWDAIHf6ShT5f5X
             authorization-grant-type: client_credentials
             scope:
               - metrics_server
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://192.168.0.103:8082/realms/selmag
   application:
     name: selmag-feedback-service
 springdoc:
@@ -36,7 +36,7 @@ springdoc:
       client-id: feedback-service-swagger-ui
       use-pkce-with-authorization-code-grant: true
 keycloak:
-  uri: http://localhost:8082
+  uri: http://192.168.0.103:8082
 management:
   health:
     livenessstate:

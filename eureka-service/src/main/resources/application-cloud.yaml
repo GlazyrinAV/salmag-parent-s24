@@ -15,15 +15,15 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/selmag
+          issuer-uri: http://192.168.0.103:8082/realms/selmag
       client:
         provider:
           keycloak:
             user-name-attribute: preferred_username
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://192.168.0.103:8082/realms/selmag
         registration:
           keycloak:
             client-id: eureka-service
-            client-secret: T1mPXNXWHOA6AB9JsqZLLNJiLqI6mKz8
+            client-secret: b1JeitaEJNZDqMUAuwbyrE02olmlVgDn
             scope:
               - openid

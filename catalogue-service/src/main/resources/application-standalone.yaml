@@ -23,18 +23,18 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/selmag
+          issuer-uri: http://192.168.0.103:8082/realms/selmag
       client:
         registration:
           keycloak:
             client-id: catalogue-service-metrics-client
-            client-secret: l2HG8kmaS6LXSuCzGruZC0PXXvHjrado
+            client-secret: k7nHa21jZsqH1L3l5KJ93YDeF5wIrwOF
             authorization-grant-type: client_credentials
             scope:
               - metrics_server
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://192.168.0.103:8082/realms/selmag
   application:
     name: selmag-catalogue-service
 logging:
